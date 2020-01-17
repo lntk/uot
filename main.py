@@ -69,8 +69,9 @@ def convergence():
 
 
 def rate():
-    from uot import find_k_sinkhorn
+    from uot import find_k_sinkhorn, solve_f_cp
     import time
+    from tqdm import tqdm
 
     """
     HYPERPARAMETERS
@@ -94,6 +95,7 @@ def rate():
     n = dim_a
     tau = tau1
     epsilon_list = np.linspace(start=10, stop=1, num=100, endpoint=False)
+    epsilons = np.array(epsilon_list)
     num_eps = len(epsilon_list)
 
     alpha = np.sum(a)
@@ -101,10 +103,10 @@ def rate():
     S = (alpha + beta + 1 / np.log(n)) * (2 * tau)
     T = 4 * ((alpha + beta) * (np.log(alpha + beta) + np.log(n)) + 1)
 
-    print(alpha)
-    print(beta)
-    print(S)
-    print(T)
+    print("alpha: ", alpha)
+    print("beta: ", beta)
+    print("S: ", S)
+    print("T: ", T)
 
     U = [S + T + epsilon + 2 * epsilon * np.log(n) / tau for epsilon in epsilon_list]
     eta_list = [epsilon_list[i] / U[i] for i in range(num_eps)]
@@ -112,20 +114,39 @@ def rate():
     """
     SOLVING UOT
     """
+    f_optimal, _ = solve_f_cp(C, a, b, tau1=tau1, tau2=tau2)
+
     k_list = list()
-    for i in range(num_eps):
-        print(epsilon_list[i])
-        print(eta_list[i])
-        time.sleep(2)
-        k_list.append(find_k_sinkhorn(C=C, a=a, b=b, epsilon=epsilon_list[i], eta=eta_list[i], tau1=tau1, tau2=tau2))
+    for i in tqdm(range(num_eps)):
+        k_list.append(find_k_sinkhorn(C=C, a=a, b=b, epsilon=epsilon_list[i], f_optimal=f_optimal, eta=eta_list[i], tau1=tau1, tau2=tau2))
+
+    """
+    SOME FUNCTIONS OF EPSILON
+    """
+    # f_eps_1 = list(1 / epsilons)
+    # f_eps_2 = list(1 / np.power(epsilons, 0.5))
+    # f_eps_3 = list(1 / np.power(epsilons, 0.1))
+
+    f_eps_1 = list(1 / epsilons * k_list[-1] * epsilons[-1])
+    f_eps_2 = list(1 / np.power(epsilons, 0.5) * k_list[-1] * np.power(epsilons[-1], 0.5))
+    f_eps_3 = list(1 / np.power(epsilons, 0.1) * k_list[-1] * np.power(epsilons[-1], 0.1))
 
     """
     PLOTTING
     """
-    fig, axs = plt.subplots(2, 2, figsize=(20, 20))
+    # fig, axs = plt.subplots(2, 2, figsize=(20, 20))
+    #
+    # axs[0, 0].plot(epsilon_list, k_list, "r", label="ratio")
+    # axs[0, 0].set_title("ratio")
 
-    axs[0, 0].plot(epsilon_list, k_list, "r", label="ratio")
-    axs[0, 0].set_title("ratio")
+    plt.figure(figsize=(20, 20))
+    plt.plot(epsilon_list, k_list, "r", label="ratio")
+    plt.plot(epsilon_list, f_eps_1, "g", label="1/e")
+    plt.plot(epsilon_list, f_eps_2, "b", label="1/e^0.5")
+    plt.plot(epsilon_list, f_eps_3, "y", label="1/e^0.1")
+    plt.xlabel("epsilon")
+    plt.ylabel("k")
+    plt.legend()
 
     plt.show()
 

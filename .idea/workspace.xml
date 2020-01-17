@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a755761c-4f88-4e84-9dee-a3ba4d5d4354" name="Default Changelist" comment="" />
+    <list default="true" id="a755761c-4f88-4e84-9dee-a3ba4d5d4354" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uot.py" beforeDir="false" afterPath="$PROJECT_DIR$/uot.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +19,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1VyS3ez1mhwLxcKf7txHvmicTcm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +31,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/unbalanced_opt_transport-master" />
   </component>
   <component name="RunManager" selected="Python.main">
@@ -104,30 +114,30 @@
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="723" y="257" width="530" height="598" key="FileChooserDialogImpl/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1578912008399" />
-    <state width="1825" height="326" key="GridCell.Tab.0.bottom" timestamp="1579052893045">
+    <state width="1825" height="385" key="GridCell.Tab.0.bottom" timestamp="1579247281560">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="326" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579052893045" />
-    <state width="1825" height="326" key="GridCell.Tab.0.center" timestamp="1579052893045">
+    <state width="1825" height="385" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579247281560" />
+    <state width="1825" height="385" key="GridCell.Tab.0.center" timestamp="1579247281560">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="326" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579052893045" />
-    <state width="1825" height="326" key="GridCell.Tab.0.left" timestamp="1579052893045">
+    <state width="1825" height="385" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579247281560" />
+    <state width="1825" height="385" key="GridCell.Tab.0.left" timestamp="1579247281560">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="326" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579052893045" />
-    <state width="1825" height="326" key="GridCell.Tab.0.right" timestamp="1579052893045">
+    <state width="1825" height="385" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579247281560" />
+    <state width="1825" height="385" key="GridCell.Tab.0.right" timestamp="1579247281560">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="326" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579052893045" />
-    <state x="573" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1579053521221">
+    <state width="1825" height="385" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579247281560" />
+    <state x="573" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1579148955219">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="573" y="345" key="com.intellij.ide.util.TipDialog/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579053521221" />
+    <state x="573" y="345" key="com.intellij.ide.util.TipDialog/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579148955219" />
     <state x="675" y="134" width="626" height="844" key="refactoring.ChangeSignatureDialog" timestamp="1578567735965">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>

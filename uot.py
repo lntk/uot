@@ -63,7 +63,7 @@ def solve_g_dual_cp(C, a, b, eta, tau):
     return prob.value, u.value, v.value
 
 
-def solve_f_primal_cp(C, a, b, tau1=1.0, tau2=1.0):
+def solve_f_cp(C, a, b, tau1=1.0, tau2=1.0):
     """
     Convex programming solver for standard Unbalanced Optimal Transport.
 
@@ -140,7 +140,7 @@ def sinkhorn_uot(C, a, b, eta=1.0, tau1=1.0, tau2=1.0, k=100):
     }
 
     # Compute optimal value and X for unregularized UOT
-    f_optimal, X_optimal = solve_f_primal_cp(C, a, b, tau1=tau1, tau2=tau2)
+    f_optimal, X_optimal = solve_f_cp(C, a, b, tau1=tau1, tau2=tau2)
     output["f_optimal"] = f_optimal
     output["X_optimal"] = X_optimal
 
@@ -187,7 +187,7 @@ def sinkhorn_uot(C, a, b, eta=1.0, tau1=1.0, tau2=1.0, k=100):
     return output
 
 
-def find_k_sinkhorn(C, a, b, epsilon, eta=1.0, tau1=1.0, tau2=1.0):
+def find_k_sinkhorn(C, a, b, epsilon, f_optimal, eta=1.0, tau1=1.0, tau2=1.0):
     # Initialization
     u = np.zeros_like(a)
     v = np.zeros_like(b)
