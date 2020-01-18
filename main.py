@@ -73,16 +73,16 @@ def rate():
     from tqdm import tqdm
 
     def max_norm(x):
-        return np.linalg.norm(x, ord=np.inf)
+        return np.amax(np.abs(x))
 
     """
     HYPERPARAMETERS
     """
-    range_a = 0.5
-    range_b = 0.5
-    range_C = 10
-    dim_a = 2
-    dim_b = 2
+    range_a = 1
+    range_b = 1
+    range_C = 1
+    dim_a = 10
+    dim_b = 10
     tau1 = 1.0
     tau2 = 1.0
 
@@ -96,16 +96,16 @@ def rate():
 
     n = dim_a
     tau = tau1
-    epsilon_list = np.linspace(start=10, stop=0, num=100, endpoint=False)
+    epsilon_list = np.linspace(start=1.0, stop=0.1, num=100, endpoint=False)
     epsilons = np.array(epsilon_list)
     num_eps = len(epsilon_list)
 
     alpha = np.sum(a)
     beta = np.sum(b)
-    S = (alpha + beta + 1 / np.log(n)) * (2 * tau)
-    T = 4 * ((alpha + beta) * (np.log(alpha + beta) + np.log(n)) + 1)
+    S = alpha + beta + 1 / (4 * np.log(n))
+    T = 2 * ((alpha + beta) * (1 / 2 * np.log((alpha + beta) / 2) + np.log(n) - 1) + 5 / 4)
 
-    U_list = [S + T + epsilon + 2 * epsilon * np.log(n) / tau for epsilon in epsilon_list]
+    U_list = [max(S + T, epsilon, 4 * epsilon * np.log(n) / tau) for epsilon in epsilon_list]
     eta_list = [epsilon_list[i] / U_list[i] for i in range(num_eps)]
     R_list = [max_norm(np.log(a)) + max_norm(np.log(b)) + max(np.log(n), 1 / eta_list[i] * max_norm(C) - np.log(n)) for i in range(num_eps)]
 
@@ -126,7 +126,7 @@ def rate():
     for i in tqdm(range(num_eps)):
         k_list_empirical.append(find_k_sinkhorn(C=C, a=a, b=b, epsilon=epsilon_list[i], f_optimal=f_optimal, eta=eta_list[i], tau1=tau1, tau2=tau2))
 
-    k_list_formula = [np.e * tau * U_list[i] / epsilon_list[i] * (np.log(6 * eta_list[i] * R_list[i]) + np.log(tau) + np.log(U_list[i] / epsilon_list[i])) for i in range(num_eps)]
+    k_list_formula = [np.e * tau * U_list[i] / epsilon_list[i] * (np.log(6 * eta_list[i] * R_list[i]) + np.log(tau * (tau + 1)) + np.log(U_list[i] / epsilon_list[i])) for i in range(num_eps)]
 
     print("f_optimal: ", f_optimal)
     print("K empirical: ", k_list_empirical)
@@ -146,10 +146,6 @@ def rate():
     """
     PLOTTING
     """
-    # fig, axs = plt.subplots(2, 2, figsize=(20, 20))
-    #
-    # axs[0, 0].plot(epsilon_list, k_list_empirical, "r", label="ratio")
-    # axs[0, 0].set_title("ratio")
 
     plt.figure(figsize=(20, 20))
     plt.plot(epsilon_list, k_list_empirical, "r", label="empirical")

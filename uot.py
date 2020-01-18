@@ -19,6 +19,11 @@ def dot(x, y):
 
 
 def compute_B(C, u, v, eta):
+    # print(C)
+    # print(u)
+    # print(v)
+    # print(eta)
+    # print(np.exp((u + v.T - C) / eta))
     return np.exp((u + v.T - C) / eta)
 
 
