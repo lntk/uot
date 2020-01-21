@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def max_norm(x):
+    return np.amax(np.abs(x))
+
+
 def convergence():
     from uot import sinkhorn_uot, solve_g_dual_cp
 
@@ -35,8 +39,8 @@ def convergence():
 
     output = sinkhorn_uot(C=C, a=a, b=b, eta=eta, tau1=tau1, tau2=tau2, k=k)
 
-    delta_u = [np.linalg.norm(u - u_optimal, ord=np.inf) for u in output["u"]]
-    delta_v = [np.linalg.norm(v - v_optimal, ord=np.inf) for v in output["v"]]
+    delta_u = [max_norm(u - u_optimal) for u in output["u"]]
+    delta_v = [max_norm(v - v_optimal) for v in output["v"]]
 
     """
     PLOTTING
@@ -72,19 +76,16 @@ def rate():
     from uot import find_k_sinkhorn, solve_f_cp
     from tqdm import tqdm
 
-    def max_norm(x):
-        return np.amax(np.abs(x))
-
     """
     HYPERPARAMETERS
     """
     range_a = 1
     range_b = 1
     range_C = 1
-    dim_a = 10
-    dim_b = 10
-    tau1 = 1.0
-    tau2 = 1.0
+    dim_a = 5
+    dim_b = 5
+    tau1 = 10
+    tau2 = 10
 
     """
     INITIALIZATION
@@ -143,6 +144,9 @@ def rate():
     f_eps_2 = list(1 / np.power(epsilons, 0.5) * k_list_empirical[-1] * np.power(epsilons[-1], 0.5))
     f_eps_3 = list(1 / np.power(epsilons, 0.1) * k_list_empirical[-1] * np.power(epsilons[-1], 0.1))
 
+    # k_formula = np.array(k_list_formula)
+    # k_list_formula_scaled = list(k_formula / k_list_formula)
+
     """
     PLOTTING
     """
@@ -161,4 +165,5 @@ def rate():
 
 
 if __name__ == '__main__':
+    # convergence()
     rate()
