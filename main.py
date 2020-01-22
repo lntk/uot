@@ -79,44 +79,53 @@ def rate():
     """
     HYPERPARAMETERS
     """
-    range_a = 1
-    range_b = 1
-    range_C = 1
+    min_a = 0.01
+    min_b = 0.01
+    min_C = 0.01
+    max_a = 5
+    max_b = 5
+    max_C = 100
     dim_a = 5
     dim_b = 5
-    tau1 = 10
-    tau2 = 10
+    tau1 = 5
+    tau2 = 5
 
     """
     INITIALIZATION
     """
-    C = np.random.uniform(low=0.01, high=range_C, size=(dim_a, dim_b))
+    C = np.random.uniform(low=min_a, high=max_C, size=(dim_a, dim_b)).astype("float128")
     C = (C + C.T) / 2
-    a = np.random.uniform(low=0.1, high=range_a, size=(dim_a, 1))
-    b = np.random.uniform(low=0.1, high=range_b, size=(dim_b, 1))
+    a = np.random.uniform(low=min_b, high=max_a, size=(dim_a, 1)).astype("float128")
+    b = np.random.uniform(low=min_C, high=max_b, size=(dim_b, 1)).astype("float128")
+
+    # a = a / np.sum(a) * 1
+    # b = b / np.sum(b) * 2
 
     n = dim_a
     tau = tau1
-    epsilon_list = np.linspace(start=1.0, stop=0.1, num=100, endpoint=False)
+    epsilon_list = np.linspace(start=1, stop=0.5, num=100, endpoint=False)
     epsilons = np.array(epsilon_list)
     num_eps = len(epsilon_list)
 
+    # scale = 2
+    # a = a * scale
+    # b = b * scale
+    # C = C * scale
+    # tau = tau * scale
+    # epsilons = epsilons * scale
+    # epsilon_list = list(epsilons)
+
     alpha = np.sum(a)
     beta = np.sum(b)
-    S = alpha + beta + 1 / (4 * np.log(n))
-    T = 2 * ((alpha + beta) * (1 / 2 * np.log((alpha + beta) / 2) + np.log(n) - 1) + 5 / 4)
+    S = 1 / 2 * (alpha + beta) + 1 / 2 + 1 / (4 * np.log(n))
+    T = 1 / 2 * (alpha + beta) * (np.log((alpha + beta) / 2) + 2 * np.log(n) - 1) + np.log(n) + 5 / 2
 
-    U_list = [max(S + T, epsilon, 4 * epsilon * np.log(n) / tau) for epsilon in epsilon_list]
+    C1 = np.e * tau * (S + T)
+    C2 = np.log(6 * max_norm(C)) + np.log(tau * (tau + 1)) + np.log(S + T)
+
+    U_list = [max(S + T, epsilon, 4 * epsilon * np.log(n) / tau, 2 * epsilon * (alpha + beta) * np.log(n) / tau) for epsilon in epsilon_list]
     eta_list = [epsilon_list[i] / U_list[i] for i in range(num_eps)]
-    R_list = [max_norm(np.log(a)) + max_norm(np.log(b)) + max(np.log(n), 1 / eta_list[i] * max_norm(C) - np.log(n)) for i in range(num_eps)]
-
-    print("alpha: ", alpha)
-    print("beta: ", beta)
-    print("S: ", S)
-    print("T: ", T)
-    print("U: ", U_list)
-    print("R: ", R_list)
-    print("eta: ", eta_list)
+    R_list = [max(max_norm(np.log(a)), max_norm(np.log(b))) + max(np.log(n), 1 / eta_list[i] * max_norm(C) - np.log(n)) for i in range(num_eps)]
 
     """
     SOLVING UOT
@@ -127,8 +136,16 @@ def rate():
     for i in tqdm(range(num_eps)):
         k_list_empirical.append(find_k_sinkhorn(C=C, a=a, b=b, epsilon=epsilon_list[i], f_optimal=f_optimal, eta=eta_list[i], tau1=tau1, tau2=tau2))
 
-    k_list_formula = [np.e * tau * U_list[i] / epsilon_list[i] * (np.log(6 * eta_list[i] * R_list[i]) + np.log(tau * (tau + 1)) + np.log(U_list[i] / epsilon_list[i])) for i in range(num_eps)]
+    k_list_formula = [(tau * U_list[i] / epsilon_list[i] + 1) * (np.log(6 * eta_list[i] * R_list[i]) + np.log(tau * (tau + 1)) + 3 * np.log(U_list[i] / epsilon_list[i])) for i in range(num_eps)]
+    k_list_function = [C1 / epsilon * (C2 - np.log(epsilon)) for epsilon in epsilon_list]
 
+    print("alpha: ", alpha)
+    print("beta: ", beta)
+    print("S: ", S)
+    print("T: ", T)
+    print("U: ", U_list)
+    print("R: ", R_list)
+    print("eta: ", eta_list)
     print("f_optimal: ", f_optimal)
     print("K empirical: ", k_list_empirical)
     print("K formula: ", k_list_formula)
@@ -151,9 +168,10 @@ def rate():
     PLOTTING
     """
 
-    plt.figure(figsize=(20, 20))
+    plt.figure(figsize=(8, 6))
     plt.plot(epsilon_list, k_list_empirical, "r", label="empirical")
     plt.plot(epsilon_list, k_list_formula, "b", label="formula")
+    # plt.plot(epsilon_list, k_list_function, "g", label="function")
     # plt.plot(epsilon_list, f_eps_1, "g", label="1/e")
     # plt.plot(epsilon_list, f_eps_2, "m", label="1/e^0.5")
     # plt.plot(epsilon_list, f_eps_3, "y", label="1/e^0.1")
