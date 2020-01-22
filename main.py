@@ -27,10 +27,10 @@ def convergence():
     """
     INITIALIZATION
     """
-    C = np.random.uniform(low=1, high=range_C, size=(dim_a, dim_b))
+    C = np.random.uniform(low=1, high=range_C, size=(dim_a, dim_b)).astype("float128")
     C = (C + C.T) / 2
-    a = np.random.uniform(low=0.1, high=range_a, size=(dim_a, 1))
-    b = np.random.uniform(low=0.1, high=range_b, size=(dim_b, 1))
+    a = np.random.uniform(low=0.1, high=range_a, size=(dim_a, 1)).astype("float128")
+    b = np.random.uniform(low=0.1, high=range_b, size=(dim_b, 1)).astype("float128")
 
     """
     SOLVING UOT
@@ -42,32 +42,42 @@ def convergence():
     delta_u = [max_norm(u - u_optimal) for u in output["u"]]
     delta_v = [max_norm(v - v_optimal) for v in output["v"]]
 
+    delta_u_ratio = [delta_u[i] / delta_u[i + 1] for i in range(k - 1)]
+    delta_v_ratio = [delta_v[i] / delta_v[i + 1] for i in range(k - 1)]
+    delta_list = [max(delta_u[i], delta_v[i]) / max(delta_u[i + 1], delta_v[i + 1]) for i in range(k - 1)]
+
     """
     PLOTTING
     """
-    fig, axs = plt.subplots(2, 2, figsize=(20, 20))
+    fig, axs = plt.subplots(3, 2, figsize=(15, 10))
 
     fig.suptitle(exp_name)
 
-    axs[0, 0].plot(list(range(k)), output["f"], "r", label="f")
-    axs[0, 0].plot([0, k - 1], [output["f_optimal"], output["f_optimal"]], "b", label="f optimal")
-    axs[0, 0].set_title("f")
-    axs[0, 0].legend()
-    axs[0, 0].text(x=0.7, y=0.7, s=f"min_f={'{0:.2f}'.format(min(output['f']))}\noptimal_f={'{0:.2f}'.format(output['f_optimal'])}", horizontalalignment='center', verticalalignment='center', transform=axs[0, 0].transAxes)
+    # axs[0, 0].plot(list(range(k)), output["f"], "r", label="f")
+    # axs[0, 0].plot([0, k - 1], [output["f_optimal"], output["f_optimal"]], "b", label="f optimal")
+    # axs[0, 0].set_title("f")
+    # axs[0, 0].legend()
+    # axs[0, 0].text(x=0.7, y=0.7, s=f"min_f={'{0:.2f}'.format(min(output['f']))}\noptimal_f={'{0:.2f}'.format(output['f_optimal'])}", horizontalalignment='center', verticalalignment='center', transform=axs[0, 0].transAxes)
+    #
+    # axs[0, 1].plot(list(range(k)), output["g_dual"], "r", label="g dual")
+    # axs[0, 1].plot([0, k - 1], [g_dual_optimal, g_dual_optimal], "b", label="g dual optimal")
+    # axs[0, 1].set_title("g dual")
+    # axs[0, 1].legend()
+    # axs[0, 1].text(x=0.7, y=0.7, s=f"min_g={'{0:.2f}'.format(min(output['g_dual']))}\noptimal_g={'{0:.2f}'.format(g_dual_optimal)}", horizontalalignment='center', verticalalignment='center', transform=axs[0, 1].transAxes)
+    #
+    # axs[1, 0].plot(list(range(k)), delta_u, "r", label="f optimal")
+    # axs[1, 0].set_title("||u - u*||_inf")
+    # axs[1, 0].text(x=0.7, y=0.7, s=f"min_du={'{0:.2f}'.format(delta_u[-1])}", horizontalalignment='center', verticalalignment='center', transform=axs[1, 0].transAxes)
+    #
+    # axs[1, 1].plot(list(range(k)), delta_v, "r", label="f optimal")
+    # axs[1, 1].set_title("||v - v*||_inf")
+    # axs[1, 1].text(x=0.7, y=0.7, s=f"min_dv={'{0:.2f}'.format(delta_v[-1])}", horizontalalignment='center', verticalalignment='center', transform=axs[1, 1].transAxes)
 
-    axs[0, 1].plot(list(range(k)), output["g_dual"], "r", label="g dual")
-    axs[0, 1].plot([0, k - 1], [g_dual_optimal, g_dual_optimal], "b", label="g dual optimal")
-    axs[0, 1].set_title("g dual")
-    axs[0, 1].legend()
-    axs[0, 1].text(x=0.7, y=0.7, s=f"min_g={'{0:.2f}'.format(min(output['g_dual']))}\noptimal_g={'{0:.2f}'.format(g_dual_optimal)}", horizontalalignment='center', verticalalignment='center', transform=axs[0, 1].transAxes)
+    axs[0, 0].plot(list(range(k - 1)), delta_list, "r")
+    axs[0, 0].set_title("||u - u*||_inf ratio")
 
-    axs[1, 0].plot(list(range(k)), delta_u, "r", label="f optimal")
-    axs[1, 0].set_title("||u - u*||_inf")
-    axs[1, 0].text(x=0.7, y=0.7, s=f"min_du={'{0:.2f}'.format(delta_u[-1])}", horizontalalignment='center', verticalalignment='center', transform=axs[1, 0].transAxes)
-
-    axs[1, 1].plot(list(range(k)), delta_v, "r", label="f optimal")
-    axs[1, 1].set_title("||v - v*||_inf")
-    axs[1, 1].text(x=0.7, y=0.7, s=f"min_dv={'{0:.2f}'.format(delta_v[-1])}", horizontalalignment='center', verticalalignment='center', transform=axs[1, 1].transAxes)
+    axs[0, 1].plot(list(range(k - 1)), delta_v_ratio, "r")
+    axs[0, 1].set_title("||v - v*||_inf ratio")
 
     plt.show()
 
@@ -183,5 +193,5 @@ def rate():
 
 
 if __name__ == '__main__':
-    # convergence()
-    rate()
+    convergence()
+    # rate()
