@@ -19,11 +19,6 @@ def dot(x, y):
 
 
 def compute_B(C, u, v, eta):
-    # print(C)
-    # print(u)
-    # print(v)
-    # print(eta)
-    # print(np.exp((u + v.T - C) / eta))
     return np.exp((u + v.T - C) / eta)
 
 
@@ -192,12 +187,15 @@ def sinkhorn_uot(C, a, b, eta=1.0, tau1=1.0, tau2=1.0, k=100):
     return output
 
 
-def find_k_sinkhorn(C, a, b, epsilon, f_optimal, eta=1.0, tau1=1.0, tau2=1.0):
+def find_k_sinkhorn(C, a, b, epsilon, f_optimal, eta=1.0, tau1=1.0, tau2=1.0, momentum=100, max_trial=100000):
     # Initialization
     u = np.zeros_like(a)
     v = np.zeros_like(b)
 
     i = 0
+    count = 0
+    trial = 0
+    start_trial = False
 
     while True:
         B = compute_B(C, u, v, eta)
@@ -213,6 +211,28 @@ def find_k_sinkhorn(C, a, b, epsilon, f_optimal, eta=1.0, tau1=1.0, tau2=1.0):
             v = (v / eta + np.log(b) - np.log(Bb)) * (tau2 * eta / (eta + tau2))
 
         if np.abs(f_primal - f_optimal) < epsilon:
-            return i
+            # print(f"{i} ------ {np.abs(f_primal - f_optimal)}")
+            if count == 0:
+                true_flag = i
+
+            counting_flag = i
+            count += 1
+            start_trial = True
+
+            if count > momentum:
+                return true_flag
+
+            # if start_trial:
+            #     print("X.")
+        else:
+            if start_trial:
+                counting_flag = -np.inf
+                count = 0
+                trial += 1
+
+        if trial > max_trial:
+            break
 
         i += 1
+
+    return counting_flag

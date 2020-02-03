@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a755761c-4f88-4e84-9dee-a3ba4d5d4354" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="a755761c-4f88-4e84-9dee-a3ba4d5d4354" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/UOT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UOT.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uot.py" beforeDir="false" afterPath="$PROJECT_DIR$/uot.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,19 +37,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.her">
     <configuration name="cvx_prog" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="UOT" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -57,6 +51,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cvx_prog.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="her" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="UOT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/her.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -88,10 +103,23 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.her" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.cvx_prog" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -124,34 +152,38 @@
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="723" y="257" width="530" height="598" key="FileChooserDialogImpl/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1578912008399" />
-    <state width="1825" height="301" key="GridCell.Tab.0.bottom" timestamp="1579519222703">
+    <state width="1825" height="238" key="GridCell.Tab.0.bottom" timestamp="1580559439596">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="301" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579519222703" />
-    <state width="1825" height="301" key="GridCell.Tab.0.center" timestamp="1579519222703">
+    <state width="1825" height="238" key="GridCell.Tab.0.bottom/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580559439596" />
+    <state width="1825" height="238" key="GridCell.Tab.0.center" timestamp="1580559439596">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="301" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579519222703" />
-    <state width="1825" height="301" key="GridCell.Tab.0.left" timestamp="1579519222702">
+    <state width="1825" height="238" key="GridCell.Tab.0.center/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580559439596" />
+    <state width="1825" height="238" key="GridCell.Tab.0.left" timestamp="1580559439596">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="301" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579519222702" />
-    <state width="1825" height="301" key="GridCell.Tab.0.right" timestamp="1579519222703">
+    <state width="1825" height="238" key="GridCell.Tab.0.left/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580559439596" />
+    <state width="1825" height="238" key="GridCell.Tab.0.right" timestamp="1580559439596">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state width="1892" height="326" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578977320900" />
-    <state width="1825" height="301" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579519222703" />
-    <state x="573" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1579491197402">
+    <state width="1825" height="238" key="GridCell.Tab.0.right/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580559439596" />
+    <state x="359" y="103" key="SettingsEditor" timestamp="1580377662494">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="573" y="345" key="com.intellij.ide.util.TipDialog/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579491197402" />
-    <state x="200" y="232" width="1653" height="848" key="dock-window-1" timestamp="1579491198305">
+    <state x="359" y="103" key="SettingsEditor/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580377662494" />
+    <state x="573" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1580441074898">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="200" y="232" width="1653" height="848" key="dock-window-1/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1579491198305" />
+    <state x="573" y="345" key="com.intellij.ide.util.TipDialog/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580441074898" />
+    <state x="200" y="232" width="1653" height="848" maximized="true" key="dock-window-1" timestamp="1580441149898">
+      <screen x="67" y="34" width="1853" height="1046" />
+    </state>
+    <state x="200" y="232" width="1653" height="848" maximized="true" key="dock-window-1/67.34.1853.1046/1920.0.1920.1080@67.34.1853.1046" timestamp="1580441149898" />
     <state x="675" y="134" width="626" height="844" key="refactoring.ChangeSignatureDialog" timestamp="1578567735965">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
