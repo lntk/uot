@@ -1,0 +1,11 @@
+/experiment
+/data
+/.idea
+*.pyc
+*.py~
+tmp/test.py
+*.gif
+/test
+*.sh
+main.py
+uot.py
